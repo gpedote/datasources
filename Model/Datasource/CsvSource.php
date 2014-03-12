@@ -183,7 +183,7 @@ class CsvSource extends DataSource {
  */
 	protected function _getDescriptionFromFirstLine(Model $model) {
 		$filename = $model->table . '.' . $this->config['extension'];
-		$handle = fopen($this->config['path'] . DS . $filename, 'r');
+		$handle = fopen($this->config['path'], 'r');
 		$line = rtrim(fgets($handle));
 		$dataComma = explode(',', $line);
 		$dataSemicolon = explode(';', $line);
@@ -229,7 +229,7 @@ class CsvSource extends DataSource {
 	public function read(Model $model, $queryData = array(), $recursive = null) {
 		$this->describe($model);
 		$config = $this->config;
-		$filename = $config['path'] . DS . $model->table . '.' . $config['extension'];
+		$filename = $config['path'];
 		if (!Set::extract($this->handle, $model->table)) {
 			$this->handle[$model->table] = fopen($filename, 'r');
 		} else {
